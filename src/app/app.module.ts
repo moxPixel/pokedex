@@ -9,6 +9,9 @@ import { NavComponent } from './nav/nav.component';
 import { EditPokemonComponent } from './edit-pokemon/edit-pokemon.component';
 import { FormsModule } from '@angular/forms';
 import { AddPokemonComponent } from './add-pokemon/add-pokemon.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './service/api.pokemon.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { AddPokemonComponent } from './add-pokemon/add-pokemon.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService,{dataEncapsulation:false}),
     AppRoutingModule
   ],
   providers: [],

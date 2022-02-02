@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { POKEMONS } from '../bdd/pokedex';
 import { Pokemon } from '../model/pokemon';
 
@@ -7,7 +9,19 @@ import { Pokemon } from '../model/pokemon';
 })
 export class PokemonDataService {
   pokemon:Pokemon = new Pokemon();
-  constructor() { }
+  private pokemonUrlApi = 'api/pokemons';
+  constructor(private httpClient: HttpClient) { }
+
+
+
+
+getPokemonsApi():Observable<Pokemon[]> {
+     return this.httpClient.get<Pokemon[]>(this.pokemonUrlApi); //Retourne une tout les pokemons via l'api get(urlApi)
+}
+
+
+
+
 
 getPokemons(){
     return POKEMONS;
