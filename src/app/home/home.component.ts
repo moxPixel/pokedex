@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { POKEMONS } from '../bdd/pokedex';
 import { Pokemon } from '../model/pokemon';
 import { PokemonDataService } from '../service/pokemon-data.service';
 
