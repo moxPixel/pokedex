@@ -15,15 +15,15 @@
 
         </div>
         <div class="d-flex">
-          <a class="btn btn-warning flex-shrink-0" type="button">
+          <a (click)="goBack()" class="btn btn-warning flex-shrink-0" type="button">
             <i class="bi-cart-fill me-1"></i>
             Retour
         </a>
-          <a [routerLink]="['/edit' ,pokemon.id]" class="btn btn-success" type="button">
+          <a (click)="goModif()" class="btn btn-success" type="button">
             <i class="bi-cart-fill me-1"></i>
             Modifier
           </a>
-          <a  class="btn btn-primary flex-shrink-0" type="button">
+          <a (click)="remove()"  class="btn btn-primary flex-shrink-0" type="button">
             <i class="bi-cart-fill me-1"></i>
             Liberer
           </a>

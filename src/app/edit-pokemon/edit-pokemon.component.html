@@ -1,0 +1,44 @@
+<h2>Edité {{pokemon.name}}</h2>
+<div class="row">
+
+<div class="col-md-4">
+<img [src]="pokemon.picture" alt="">
+</div>
+
+<div class="col-md-8">
+  <form (ngSubmit)="onSubmit()">
+     <div class="form-group">
+       <label for="name">Nom</label>
+       <input type="text" class="form-control" id="name" required [(ngModel)]="pokemon.name" name="name" #name="ngModel">
+     </div>
+
+     <div class="form-group">
+      <label for="photo">Photo</label>
+      <input type="text" class="form-control" id="photo" required [(ngModel)]="pokemon.picture" name="picture" #picture="ngModel">
+    </div>
+
+    <div class="form-group">
+      <label for="photo">Point de vie</label>
+      <input type="text" class="form-control" id="hp" required [(ngModel)]="pokemon.hp" name="hp" #hp="ngModel">
+    </div>
+
+    <div class="form-group">
+      <label for="photo">Dégat</label>
+      <input type="text" class="form-control" id="cp" required [(ngModel)]="pokemon.cp" name="cp" #cp="ngModel">
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-primary btn-block">Valider</button>
+  </form>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
