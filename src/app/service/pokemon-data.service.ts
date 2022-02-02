@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { POKEMONS } from '../bdd/pokedex';
@@ -21,11 +21,35 @@ getPokemonsApi():Observable<Pokemon[]> {
 
 
 
+getOnePokemonApi(id: number):Observable<Pokemon> {
+const url = `${this.pokemonUrlApi}/${id}`;
+return this.httpClient.get<Pokemon>(url);
+}
+
+
+
+updatePokemon(pokemon:Pokemon):Observable<Pokemon>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.httpClient.put<Pokemon>(this.pokemonUrlApi,pokemon,httpOptions);
+}
+
+addPokemon(pokemon: Pokemon):Observable<Pokemon>{
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.httpClient.post<Pokemon>(this.pokemonUrlApi,pokemon,httpOptions);
+}
+
+
 
 
 getPokemons(){
     return POKEMONS;
   }
+
+
 
 getPokemon(id:number){
   let pokemons = this.getPokemons();

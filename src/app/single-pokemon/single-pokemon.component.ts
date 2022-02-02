@@ -13,9 +13,11 @@ export class SinglePokemonComponent implements OnInit {
   constructor(private router: ActivatedRoute, private routing: Router, private PokemonDataService: PokemonDataService) { }
 
   ngOnInit(): void {
-    this.pokemons = this.PokemonDataService.getPokemons();  // recupere tout les pokemons
+    // this.pokemons = this.PokemonDataService.getPokemons();  // recupere tout les pokemons
     let id = this.router.snapshot.params['id']; //récupérer l'id du pokemon dans l'url
-    this.pokemon = this.PokemonDataService.getPokemon(id); // récupérer le pokemon correspondant à l'id
+    this.pokemon = this.PokemonDataService.getOnePokemonApi(id).subscribe(data => {
+      this.pokemon = data;
+    })
   }
 
   goBack(): void {

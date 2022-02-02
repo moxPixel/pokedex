@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private pokemonService: PokemonDataService) { }
 
   ngOnInit(): void {
-    // this.pokemons = POKEMONS;
+    //  this.pokemons = POKEMONS;
     this.pokemonService.getPokemonsApi().subscribe(data =>{ // Recuperation des data de l'api et attribution de celle ci a la variable pokemons[]
       this.pokemons = data
       console.log(this.pokemons);

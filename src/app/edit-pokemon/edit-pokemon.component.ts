@@ -14,13 +14,17 @@ export class EditPokemonComponent implements OnInit {
   constructor(private router: ActivatedRoute, private routing: Router, private PokemonDataService: PokemonDataService) { }
 
   ngOnInit(): void {
-    this.pokemons = this.PokemonDataService.getPokemons();  // recupere tout les pokemons
     let id = this.router.snapshot.params['id']; //récupérer l'id du pokemon dans l'url
-    this.pokemon = this.PokemonDataService.getPokemon(id); // récupérer le pokemon correspondant à l'id
+    this.pokemon = this.PokemonDataService.getOnePokemonApi(id).subscribe(data =>{
+      this.pokemon = data;
+    })
   }
 
 
   onSubmit(){
+    this.PokemonDataService.updatePokemon(this.pokemon).subscribe(data => {
+      this.pokemon = data;
+    });
    let link = ['/single', this.pokemon.id];
    this.routing.navigate(link);
   }
