@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { POKEMONS } from '../bdd/pokedex';
 import { Pokemon } from '../model/pokemon';
 
 @Injectable({
@@ -9,8 +8,8 @@ import { Pokemon } from '../model/pokemon';
 })
 export class PokemonDataService {
   pokemon:Pokemon = new Pokemon();
-  private pokemonUrlApi = 'api/pokemons';
-  constructor(private httpClient: HttpClient) { }
+  private pokemonUrlApi = 'api/pokemons'; //Contien l 'url de notre api (fictive ou reél)'
+  constructor(private httpClient: HttpClient) { } // HttpClient est une classe de l'api angular qui contien les methode put,post,patch,delete,get
 
 
 
@@ -21,21 +20,21 @@ getPokemonsApi():Observable<Pokemon[]> {
 
 
 
-getOnePokemonApi(id: number):Observable<Pokemon> {
+getOnePokemonApi(id: number):Observable<Pokemon> { // Recuperation d'un pokemon via l'api get(urlApi)
 const url = `${this.pokemonUrlApi}/${id}`;
 return this.httpClient.get<Pokemon>(url);
 }
 
 
 
-updatePokemon(pokemon:Pokemon):Observable<Pokemon>{
+updatePokemon(pokemon:Pokemon):Observable<Pokemon>{  // Modification d'un pokemon via l'api put(urlApi)
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
     return this.httpClient.put<Pokemon>(this.pokemonUrlApi,pokemon,httpOptions);
 }
 
-addPokemon(pokemon: Pokemon):Observable<Pokemon>{
+addPokemon(pokemon: Pokemon):Observable<Pokemon>{ // Ajout d'un pokemon via l'api post(urlApi)
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -43,24 +42,16 @@ addPokemon(pokemon: Pokemon):Observable<Pokemon>{
 }
 
 
-
-
-getPokemons(){
-    return POKEMONS;
-  }
-
-
-
-getPokemon(id:number){
-  let pokemons = this.getPokemons();
-  for(let i =0; i < pokemons.length; i++) {
-    if(pokemons[i].id == id){
-      this.pokemon = pokemons[i];
-    }
- }
- return this.pokemon;
-
+deletPokemon(pokemon: Pokemon):Observable<Pokemon>{  // Suppression d'un pokemon via l'api delete(urlApi)
+  const url = `${this.pokemonUrlApi}/${pokemon.id}`;
+  const httpOptions = { // Header(format de donnés qui transite dnas l url (jSon format))
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })  
+  };
+  return this.httpClient.delete<Pokemon>(url,httpOptions);
 }
+
+
+
 
 
 }

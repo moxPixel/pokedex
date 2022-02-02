@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonDataService } from '../service/pokemon-data.service';
 
 @Component({
@@ -12,26 +12,21 @@ export class SinglePokemonComponent implements OnInit {
   pokemons: any;
   constructor(private router: ActivatedRoute, private routing: Router, private PokemonDataService: PokemonDataService) { }
 
-  ngOnInit(): void {
-    // this.pokemons = this.PokemonDataService.getPokemons();  // recupere tout les pokemons
+  ngOnInit(): void { 
     let id = this.router.snapshot.params['id']; //récupérer l'id du pokemon dans l'url
-    this.pokemon = this.PokemonDataService.getOnePokemonApi(id).subscribe(data => {
+    this.pokemon = this.PokemonDataService.getOnePokemonApi(id).subscribe(data => { // récupération du pokemon via l'api
       this.pokemon = data;
     })
   }
 
-  goBack(): void {
-    this.routing.navigate(['']);
+  goBack(): void { // redirection vers la page d'accueil
+    this.routing.navigate(['']); 
   }
 
-  goModif(): void {
+  goModif(): void { // redirection vers la page de modification
     this.routing.navigate(['edit', this.pokemon.id]);
   }
   remove() {
-    const index = this.pokemons.indexOf(this.pokemon, 0);
-    if (index > -1) {
-      this.pokemons.splice(index, 1);
-    }
-    this.goBack();
+    this.PokemonDataService.deletPokemon(this.pokemon).subscribe(_ =>  this.goBack()); // Suppression du pokemon via l'api methode delete(), et redirection vers la page d'accueil
   }
 }
